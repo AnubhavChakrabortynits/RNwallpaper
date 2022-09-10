@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { View,Text,Image } from 'react-native'
 import { StyleSheet } from 'react-native'
+import { TouchableOpacity,CameraRollStatic } from 'react-native'
 export default function Screen2({route}) {
     const clickedImage=route.params
 
@@ -12,7 +13,14 @@ setImageData((JSON.parse(clickedImage.clickedImage).cover_photo.urls.regular))
     },[])
   return (
     <View style={styles.imageCont}>
-                <Image style={styles.image} source={{uri:imageData}}/>
+                {typeof(imageData=='object') && <Image style={styles.image} source={{uri:imageData}}/>}
+               <View style={{alignItems:"center"}}>
+               <TouchableOpacity style={styles.download} onPress={()=>{}}>
+                    <Text style={styles.dtext}>Download</Text>
+
+                </TouchableOpacity>
+ 
+               </View>
 </View>
   )
 }
@@ -35,5 +43,19 @@ width:"100%",height:"100%"
     },maincont:{
         alignItems:"center",backgroundColor:"black"
     },
+    download:{
+        position:"absolute",
+        bottom:10,
+        backgroundColor:"yellow",
+        paddingVertical:10,
+        borderRadius:10,
+        marginHorizontal:"auto",width:200,alignItems:"center"
+    },
+    dtext:{
+        color:"black",
+        fontWeight:"bold",fontSize:24
+    },
+
+ 
     
 })
